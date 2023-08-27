@@ -1,0 +1,64 @@
+Private Sub tmrUpdate_Timer()
+On Error GoTo Erro
+    
+
+    If cmdIniciar1(0).BackColor = vbGreen Then
+        ' Configurações para Registros
+        query = "SELECT * FROM TabelaTreino ORDER by Nome ASC "
+        Call queryString(query)
+        
+        ' Busca no registro nome selecionado
+        Do While Not Adodc1.Recordset.EOF
+            If Adodc1.Recordset("Nome") = cboName1.Text And Adodc1.Recordset("Data") = DTPicker1.value Then
+                Exit Do ' Localizado
+            End If
+            Adodc1.Recordset.MoveNext
+        Loop
+               
+        ' Atualiza pontos no treino atual
+        If Adodc1.Recordset.EOF = False Then
+            If Not Adodc1.Recordset("T1-E") Then Combo1(0).Text = Adodc1.Recordset("T1-E")
+            If Not Adodc1.Recordset("T1-1") Then Combo1(1).Text = Adodc1.Recordset("T1-1")
+            If Not Adodc1.Recordset("T1-2") Then Combo1(2).Text = Adodc1.Recordset("T1-2")
+            If Not Adodc1.Recordset("T1-3") Then Combo1(3).Text = Adodc1.Recordset("T1-3")
+            If Not Adodc1.Recordset("T1-4") Then Combo1(4).Text = Adodc1.Recordset("T1-4")
+            If Not Adodc1.Recordset("T1-5") Then Combo1(5).Text = Adodc1.Recordset("T1-5")
+            If Not Adodc1.Recordset("T1-Total") Then txtTotal(1).Text = Adodc1.Recordset("T1-Total")
+            If Not Adodc1.Recordset("T2-E") Then Combo1(6).Text = Adodc1.Recordset("T2-E")
+            If Not Adodc1.Recordset("T2-1") Then Combo1(7).Text = Adodc1.Recordset("T2-1")
+            If Not Adodc1.Recordset("T2-2") Then Combo1(8).Text = Adodc1.Recordset("T2-2")
+            If Not Adodc1.Recordset("T2-3") Then Combo1(9).Text = Adodc1.Recordset("T2-3")
+            If Not Adodc1.Recordset("T2-4") Then Combo1(10).Text = Adodc1.Recordset("T2-4")
+            If Not Adodc1.Recordset("T2-5") Then Combo1(11).Text = Adodc1.Recordset("T2-5")
+            If Not Adodc1.Recordset("T2-Total") Then txtTotal(2).Text = Adodc1.Recordset("T2-Total")
+            If Not Adodc1.Recordset("T1T2-SubTotal") Then txtTotal(3).Text = Adodc1.Recordset("T1T2-SubTotal")
+            If Not Adodc1.Recordset("T3-E") Then Combo1(12).Text = Adodc1.Recordset("T3-E")
+            If Not Adodc1.Recordset("T3-1") Then Combo1(13).Text = Adodc1.Recordset("T3-1")
+            If Not Adodc1.Recordset("T3-2") Then Combo1(14).Text = Adodc1.Recordset("T3-2")
+            If Not Adodc1.Recordset("T3-3") Then Combo1(15).Text = Adodc1.Recordset("T3-3")
+            If Not Adodc1.Recordset("T3-4") Then Combo1(16).Text = Adodc1.Recordset("T3-4")
+            If Not Adodc1.Recordset("T3-5") Then Combo1(17).Text = Adodc1.Recordset("T3-5")
+            If Not Adodc1.Recordset("T3-Total") Then txtTotal(4).Text = Adodc1.Recordset("T3-Total")
+            If Not Adodc1.Recordset("T4-E") Then Combo1(18).Text = Adodc1.Recordset("T4-E")
+            If Not Adodc1.Recordset("T4-1") Then Combo1(19).Text = Adodc1.Recordset("T4-1")
+            If Not Adodc1.Recordset("T4-2") Then Combo1(20).Text = Adodc1.Recordset("T4-2")
+            If Not Adodc1.Recordset("T4-3") Then Combo1(21).Text = Adodc1.Recordset("T4-3")
+            If Not Adodc1.Recordset("T4-4") Then Combo1(22).Text = Adodc1.Recordset("T4-4")
+            If Not Adodc1.Recordset("T4-5") Then Combo1(23).Text = Adodc1.Recordset("T4-5")
+            If Not Adodc1.Recordset("T4-Total") Then txtTotal(5).Text = Adodc1.Recordset("T4-Total")
+            If Not Adodc1.Recordset("T3T4-SubTotal") Then txtTotal(6).Text = Adodc1.Recordset("T3T4-SubTotal")
+            If Not Adodc1.Recordset("TotalFinal") Then txtTotal(7).Text = Adodc1.Recordset("TotalFinal")
+        End If
+        
+    End If
+                                    
+    ' Fecha conexão com o registro
+    'Adodc1.Recordset.Close
+    
+Exit Sub
+
+Erro:
+    Beep
+    MsgBox Error, vbExclamation, "DALCOQUIO AUTOMAÇÃO"
+    
+End Sub

@@ -1,0 +1,70 @@
+Attribute VB_Name = "Module2"
+'Item:
+'Coluna: Valor -  Index: 1
+'
+'SubItems:
+'Coluna: E - Index 1
+'Coluna: 1 - Index 2
+'Coluna: 2 - Index 3
+'Coluna: 3 - Index 4
+'Coluna: 4 - Index 5
+'Coluna: 5 - Index 6
+'Coluna: T1 - Index 7
+'Coluna: E - Index 8
+'Coluna: 1 - Index 9
+'Coluna: 2 - Index 10
+'Coluna: 3 - Index 11
+'Coluna: 4 - Index 12
+'Coluna: 5 - Index 13
+'Coluna: T2 - Index 14
+'Coluna: Sub Total - Index 15
+'Coluna: E - Index 16
+'Coluna: 1 - Index 17
+'Coluna: 2 - Index 18
+'Coluna: 3 - Index 19
+'Coluna: 4 - Index 20
+'Coluna: 5 - Index 21
+'Coluna: T3 - Index 22
+'Coluna: E - Index 23
+'Coluna: 1 - Index 24
+'Coluna: 2 - Index 25
+'Coluna: 3 - Index 26
+'Coluna: 4 - Index 27
+'Coluna: 5 - Index 28
+'Coluna: T4 - Index 29
+'Coluna: Sub Total - Index: 30
+'Coluna: Total Final - Index 30
+'
+'ColumnHeader:
+'Coluna: Valor - Index: 1
+'Coluna: E - Index 2
+'Coluna: 1 - Index 3
+'Coluna: 2 - Index 4
+'Coluna: 3 - Index 5
+'Coluna: 4 - Index 6
+'Coluna: 5 - Index 67
+'Coluna: T1 - Index 8
+'Coluna: E - Index 9
+'Coluna: 1 - Index 10
+'Coluna: 2 - Index 11
+'Coluna: 3 - Index 12
+'Coluna: 4 - Index 13
+'Coluna: 5 - Index 14
+'Coluna: T2 - Index 15
+'Coluna: Sub Total - Index 16
+'Coluna: E - Index 17
+'Coluna: 1 - Index 18
+'Coluna: 2 - Index 19
+'Coluna: 3 - Index 20
+'Coluna: 4 - Index 21
+'Coluna: 5 - Index 22
+'Coluna: T3 - Index 23
+'Coluna: E - Index 24
+'Coluna: 1 - Index 25
+'Coluna: 2 - Index 26
+'Coluna: 3 - Index 27
+'Coluna: 4 - Index 28
+'Coluna: 5 - Index 29
+'Coluna: T4 - Index 30
+'Coluna: Sub Total - Index: 31
+'Coluna: Total Final - Index 32
