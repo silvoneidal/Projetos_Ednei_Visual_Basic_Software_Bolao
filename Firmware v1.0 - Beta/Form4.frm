@@ -9,12 +9,12 @@ Begin VB.Form frmPrint
    ClientHeight    =   8685
    ClientLeft      =   45
    ClientTop       =   345
-   ClientWidth     =   23055
+   ClientWidth     =   23700
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   8685
-   ScaleWidth      =   23055
+   ScaleWidth      =   23700
    StartUpPosition =   2  'CenterScreen
    Begin MSAdodcLib.Adodc Adodc1 
       Height          =   330
@@ -69,8 +69,8 @@ Begin VB.Form frmPrint
       Left            =   0
       TabIndex        =   0
       Top             =   0
-      Width           =   23055
-      _ExtentX        =   40666
+      Width           =   23655
+      _ExtentX        =   41725
       _ExtentY        =   15266
       _Version        =   393216
       AllowUpdate     =   -1  'True
@@ -97,7 +97,7 @@ Begin VB.Form frmPrint
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ColumnCount     =   35
+      ColumnCount     =   36
       BeginProperty Column00 
          DataField       =   "ID"
          Caption         =   "ID"
@@ -553,6 +553,19 @@ Begin VB.Form frmPrint
             SubFormatType   =   0
          EndProperty
       EndProperty
+      BeginProperty Column35 
+         DataField       =   "HORA-FIM"
+         Caption         =   "Hora-Fim"
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   1046
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
       SplitCount      =   1
       BeginProperty Split0 
          BeginProperty Column00 
@@ -658,7 +671,10 @@ Begin VB.Form frmPrint
             ColumnWidth     =   794,835
          EndProperty
          BeginProperty Column34 
-            ColumnWidth     =   1500,095
+            ColumnWidth     =   1005,165
+         EndProperty
+         BeginProperty Column35 
+            ColumnWidth     =   1005,165
          EndProperty
       EndProperty
    End

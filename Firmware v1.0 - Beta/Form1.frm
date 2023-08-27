@@ -1378,7 +1378,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   81592321
+         Format          =   51511297
          CurrentDate     =   45154
       End
       Begin VB.Label Label7 
@@ -2723,7 +2723,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   81592321
+         Format          =   51511297
          CurrentDate     =   45154
       End
       Begin VB.Label Label6 
@@ -4068,7 +4068,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   81592321
+         Format          =   51511297
          CurrentDate     =   45154
       End
       Begin VB.Label Label4 
@@ -5447,7 +5447,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   81592321
+         Format          =   51511297
          CurrentDate     =   45154
       End
       Begin VB.ComboBox cboName1 
