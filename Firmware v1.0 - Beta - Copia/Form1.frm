@@ -1378,7 +1378,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   51511297
+         Format          =   50987009
          CurrentDate     =   45154
       End
       Begin VB.Label Label7 
@@ -2723,7 +2723,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   51511297
+         Format          =   50987009
          CurrentDate     =   45154
       End
       Begin VB.Label Label6 
@@ -4068,7 +4068,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   51511297
+         Format          =   50987009
          CurrentDate     =   45154
       End
       Begin VB.Label Label4 
@@ -5447,7 +5447,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   51511297
+         Format          =   50987009
          CurrentDate     =   45154
       End
       Begin VB.ComboBox cboName1 
@@ -6667,6 +6667,7 @@ Erro:
     Beep
     If Err.Number = 482 Then
         MsgBox "Processo cancelado !!!", vbExclamation, "DALCOQUIO AUTOMAÇÃO"
+        ptrCupom.Cls
     Else
         MsgBox Error, vbExclamation, "DALCOQUIO AUTOMAÇÃO"
         'MsgBox Err.number, vbExclamation, "DALCOQUIO AUTOMAÇÃO"

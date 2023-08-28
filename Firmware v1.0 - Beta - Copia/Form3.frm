@@ -47,8 +47,8 @@ Begin VB.Form frmRegistros
       TabIndex        =   8
       Top             =   9720
       Width           =   22695
-      Begin VB.CommandButton cmdAtualizar 
-         Caption         =   "Atualizar Registros"
+      Begin VB.CommandButton cmdDownload 
+         Caption         =   "Download Registros"
          BeginProperty Font 
             Name            =   "Consolas"
             Size            =   9.75
@@ -219,7 +219,7 @@ Begin VB.Form frmRegistros
          _ExtentX        =   2566
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   81592321
+         Format          =   50987009
          CurrentDate     =   45156
       End
       Begin MSComCtl2.DTPicker dtpFinal 
@@ -231,7 +231,7 @@ Begin VB.Form frmRegistros
          _ExtentX        =   2566
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   81592321
+         Format          =   50987009
          CurrentDate     =   45156
       End
    End
@@ -292,12 +292,11 @@ Begin VB.Form frmRegistros
       _ExtentX        =   40031
       _ExtentY        =   15266
       _Version        =   393216
-      AllowUpdate     =   -1  'True
-      Enabled         =   0   'False
+      AllowUpdate     =   0   'False
+      Enabled         =   -1  'True
       HeadLines       =   1
       RowHeight       =   15
       FormatLocked    =   -1  'True
-      AllowDelete     =   -1  'True
       BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -1022,11 +1021,13 @@ End Sub
 
 Private Sub cmdEditar_Click()
     If cmdEditar.Caption = "Editar (Desativado)" Then
-        DataGrid1.Enabled = True
+        DataGrid1.AllowDelete = True
+        DataGrid1.AllowUpdate = True
         cmdEditar.Caption = "Editar (Ativado)"
         cmdEditar.BackColor = vbYellow
     Else
-        DataGrid1.Enabled = False
+        DataGrid1.AllowDelete = False
+        DataGrid1.AllowUpdate = False
         cmdEditar.Caption = "Editar (Desativado)"
         cmdEditar.BackColor = &H8000000F
     End If
@@ -1088,7 +1089,7 @@ End Sub
 ' ATUALIZA LISTA DE REGISTROS (REFRESH)
 '//////////////////////////////////////////////////////////////////////////////////////////////
 
-Private Sub cmdAtualizar_Click()
+Private Sub cmdDownload_Click()
     Call ReadAllRegisters
     
 End Sub
@@ -1109,72 +1110,97 @@ End Sub
 '//////////////////////////////////////////////////////////////////////////////////////////////
 
 Private Sub cmdPrintCupom_Click()
+
 On Error GoTo Erro
-    
-    ' Nome para busca no registro
-    If cboName.Text = Empty Then
-        MsgBox "Nenhum nome selecionado.", vbInformation, "DALÇÓQUIO AUTOMAÇÃO"
+
+    ' Verifica nome selecionado na lista
+    Dim selectedID As String
+    selectedID = DataGrid1.Columns(3).Text
+
+     ' Se nenhum nome selecionada na lista
+    If selectedID = Empty Then
+        MsgBox "Nenhum nome selecionado na lista.", vbInformation, "DALÇÓQUIO AUTOMAÇÃO"
         Exit Sub
     End If
     
-    ' Busca os registros
-    Dim ptrData As String
-    Dim ptrNome As String
-    Dim ptrT1 As Integer
-    Dim ptrT2 As Integer
-    Dim ptrT1T2 As Integer
-    Dim ptrT3 As Integer
-    Dim ptrT4 As Integer
-    Dim ptrT3T4 As Integer
-    Dim ptrTotal As Integer
-     
-    ' Critério de busca
-    query = "SELECT * FROM TabelaTreino WHERE NOME LIKE '%" & cboName.Text & "%'"
+    ' Configurações para Registros
+    query = "SELECT * FROM TabelaCadastro ORDER by Nome ASC "
     Call queryString(query)
-    If Not Adodc1.Recordset.EOF Then
-        ptrData = Adodc1.Recordset.Fields("DATA")
-        ptrNome = Adodc1.Recordset.Fields("NOME")
-        ptrT1 = Adodc1.Recordset.Fields("T1-Total")
-        ptrT2 = Adodc1.Recordset.Fields("T2-Total")
-        ptrT1T2 = Adodc1.Recordset.Fields("T1T2-SubTotal")
-        ptrT3 = Adodc1.Recordset.Fields("T3-Total")
-        ptrT4 = Adodc1.Recordset.Fields("T4-Total")
-        ptrT3T4 = Adodc1.Recordset.Fields("T3T4-SubTotal")
-        ptrTotal = Adodc1.Recordset.Fields("TotalFinal")
+    
+     ' Busca no registro nome selecionado na lista
+    Do While Not Adodc1.Recordset.EOF
+        If Adodc1.Recordset("NOME") = selectedID Then
+            Exit Do ' Localizado
+        End If
+        Adodc1.Recordset.MoveNext
+    Loop
+    
+    If Adodc1.Recordset.EOF = True Then
+        MsgBox "Nome não encontrado !!!", vbInformation, "DALÇÓQUIO AUTOMAÇÃO"
+        Exit Sub
+    Else
+    
+        ' Busca os registros
+        Dim ptrData As String
+        Dim ptrNome As String
+        Dim ptrT1 As Integer
+        Dim ptrT2 As Integer
+        Dim ptrT1T2 As Integer
+        Dim ptrT3 As Integer
+        Dim ptrT4 As Integer
+        Dim ptrT3T4 As Integer
+        Dim ptrTotal As Integer
+         
+        ' Critério de busca
+        query = "SELECT * FROM TabelaTreino WHERE NOME LIKE '%" & selectedID & "%'"
+        Call queryString(query)
+        If Not Adodc1.Recordset.EOF Then
+            ptrData = Adodc1.Recordset.Fields("DATA")
+            ptrNome = Adodc1.Recordset.Fields("NOME")
+            ptrT1 = Adodc1.Recordset.Fields("T1-Total")
+            ptrT2 = Adodc1.Recordset.Fields("T2-Total")
+            ptrT1T2 = Adodc1.Recordset.Fields("T1T2-SubTotal")
+            ptrT3 = Adodc1.Recordset.Fields("T3-Total")
+            ptrT4 = Adodc1.Recordset.Fields("T4-Total")
+            ptrT3T4 = Adodc1.Recordset.Fields("T3T4-SubTotal")
+            ptrTotal = Adodc1.Recordset.Fields("TotalFinal")
+        
+            ' Monta Cupom
+            ptrCupom.AutoRedraw = True
+            ptrCupom.Cls
+            
+            Fonte 10, False, False
+            ptrCupom.Print String(45, " ") 'Pula uma Linha
+            ptrCupom.Print String(45, "-") 'Faz uma Linha
+            ptrCupom.Print "Data: " & ptrData
+            ptrCupom.Print String(45, "-") 'Faz uma Linha
+            ptrCupom.Print "Nome: " & ptrNome
+            ptrCupom.Print String(45, " ") 'Pula uma Linha
+            ptrCupom.Print "ToTal 1: " & ptrT1
+            ptrCupom.Print "ToTal 2: " & ptrT2
+            ptrCupom.Print "Sub Total: " & ptrT1T2
+            ptrCupom.Print "ToTal 3: " & ptrT3
+            ptrCupom.Print "ToTal 4: " & ptrT4
+            ptrCupom.Print "Sub Total: " & ptrT3T4
+            Fonte 12, True, False
+            ptrCupom.Print "Total Final: " & ptrTotal
+            Fonte 10, False, False
+            ptrCupom.Print String(45, " ") 'Pula uma Linha
+            ptrCupom.Print String(45, "-") 'Faz uma Linha
+            ptrCupom.Print Tab(1); "DALCOQUIO AUTOMACAO"
+            ptrCupom.Print String(45, "-") 'Faz uma Linha
+            ptrCupom.Print String(45, " ") 'Pula uma Linha
+            
+            ' Imprimir
+            CommonDialog1.ShowPrinter
+            'Printer.PaintPicture ptrCupom.Image, PositionX, PosicionY, Width, Height
+            Printer.PaintPicture ptrCupom.Image, 0, 0
+            Printer.EndDoc
+            ptrCupom.Cls
+        
+        End If
+    
     End If
-    
-    ' Monta Cupom
-    ptrCupom.AutoRedraw = True
-    ptrCupom.Cls
-    
-    Fonte 10, False, False
-    ptrCupom.Print String(45, " ") 'Pula uma Linha
-    ptrCupom.Print String(45, "-") 'Faz uma Linha
-    ptrCupom.Print "Data: " & ptrData
-    ptrCupom.Print String(45, "-") 'Faz uma Linha
-    ptrCupom.Print "Nome: " & ptrNome
-    ptrCupom.Print String(45, " ") 'Pula uma Linha
-    ptrCupom.Print "ToTal 1: " & ptrT1
-    ptrCupom.Print "ToTal 2: " & ptrT2
-    ptrCupom.Print "Sub Total: " & ptrT1T2
-    ptrCupom.Print "ToTal 3: " & ptrT3
-    ptrCupom.Print "ToTal 4: " & ptrT4
-    ptrCupom.Print "Sub Total: " & ptrT3T4
-    Fonte 12, True, False
-    ptrCupom.Print "Total Final: " & ptrTotal
-    Fonte 10, False, False
-    ptrCupom.Print String(45, " ") 'Pula uma Linha
-    ptrCupom.Print String(45, "-") 'Faz uma Linha
-    ptrCupom.Print Tab(1); "DALCOQUIO AUTOMACAO"
-    ptrCupom.Print String(45, "-") 'Faz uma Linha
-    ptrCupom.Print String(45, " ") 'Pula uma Linha
-    
-    ' Imprimir
-    CommonDialog1.ShowPrinter
-    'Printer.PaintPicture ptrCupom.Image, PositionX, PosicionY, Width, Height
-    Printer.PaintPicture ptrCupom.Image, 0, 0
-    Printer.EndDoc
-    ptrCupom.Cls
     
 Exit Sub
 
@@ -1182,6 +1208,7 @@ Erro:
     Beep
     If Err.Number = 482 Then
         MsgBox "Processo cancelado !!!", vbExclamation, "DALCOQUIO AUTOMAÇÃO"
+        ptrCupom.Cls
     Else
         MsgBox Error, vbExclamation, "DALCOQUIO AUTOMAÇÃO"
         'MsgBox Err.number, vbExclamation, "DALCOQUIO AUTOMAÇÃO"
