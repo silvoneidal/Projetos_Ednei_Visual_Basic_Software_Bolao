@@ -1378,7 +1378,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   50987009
+         Format          =   54591489
          CurrentDate     =   45154
       End
       Begin VB.Label Label7 
@@ -2723,7 +2723,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   50987009
+         Format          =   54591489
          CurrentDate     =   45154
       End
       Begin VB.Label Label6 
@@ -4068,7 +4068,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   50987009
+         Format          =   54591489
          CurrentDate     =   45154
       End
       Begin VB.Label Label4 
@@ -5447,7 +5447,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   50987009
+         Format          =   54591489
          CurrentDate     =   45154
       End
       Begin VB.ComboBox cboName1 
@@ -5538,8 +5538,11 @@ Begin VB.Form frmTreino
          Begin VB.Menu mnuTestBD 
             Caption         =   "Teste de Conexão"
          End
+         Begin VB.Menu mnuAddressBKP 
+            Caption         =   "Endereço do Backup"
+         End
          Begin VB.Menu mnuAddressBD 
-            Caption         =   "Registrar Endereço"
+            Caption         =   "Endereço do Registro"
          End
       End
    End
@@ -5564,6 +5567,7 @@ Dim treino As Boolean ' flag para treino ativo
 
 ' Variáveis para uso do banco de dados
 Public addressRegisters As String ' endereço do banco de dados
+Public addressBackups As String ' endereço de backup do banco de dados
 Public nameRegisters As String ' nome do banco de dados
 Dim query As String ' sql para o banco de dados
 
@@ -5589,7 +5593,8 @@ On Error GoTo Erro
 
     ' Configurações iniciais para o banco de dados
     nameRegisters = "\RegistrosBolao" 'Name do registro
-    addressRegisters = ReadIniValue(App.Path & "\Config.ini", "REGISTROS", "Address") ' Endereço do registro
+    addressRegisters = ReadIniValue(App.Path & "\Config.ini", "REGISTROS", "AddressBD") ' Endereço do registro
+    addressBackups = ReadIniValue(App.Path & "\Config.ini", "REGISTROS", "AddressBKP") ' Endereço de backup
     Adodc1.ConnectionString = "Driver={Microsoft Access Driver (*.mdb)};" & "Dbq= " & frmTreino.addressRegisters & nameRegisters & ";" & "Uid=;"  ' Pwd=1234"
     
     ' Busca nomes cadastrados no registro
@@ -6706,14 +6711,24 @@ Private Sub mnuControle_Click()
 End Sub
 
 Private Sub mnuAddressBD_Click()
-    value = InputBox("Digite o Endereço do Banco de Dados.", "DALÇÓQUIO AUTOMAÇÃO", addressRegisters)
+    value = InputBox("Digite o Endereço do Banco de Dados.", "DALÇÓQUIO AUTOMAÇÃO", addressBackups)
     If value <> Empty Then
         addressRegisters = value
-        WriteIniValue App.Path & "\Config.ini", "REGISTROS", "address", addressRegisters
+        WriteIniValue App.Path & "\Config.ini", "REGISTROS", "addressBD", addressRegisters
         MsgBox "Fechando sistema para atualização do endereço do bando de dados, você deverá abri-lo novamente...", vbInformation, "DALÇÓQUIO AUTOMAÇÃO"
         End ' Fecha o sistema
     End If
 
+End Sub
+
+Private Sub mnuAddressBKP_Click()
+    value = InputBox("Digite o Endereço de Backup.", "DALÇÓQUIO AUTOMAÇÃO", addressRegisters)
+    If value <> Empty Then
+        addressBackups = value
+        WriteIniValue App.Path & "\Config.ini", "REGISTROS", "addressBKP", addressBackups
+        MsgBox "Fechando sistema para atualização do endereço de Backup, você deverá abri-lo novamente...", vbInformation, "DALÇÓQUIO AUTOMAÇÃO"
+        End ' Fecha o sistema
+    End If
 End Sub
 
 Private Sub mnuTestBD_Click()

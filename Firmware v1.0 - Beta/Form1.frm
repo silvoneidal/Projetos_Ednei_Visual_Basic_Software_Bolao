@@ -1378,7 +1378,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   50987009
+         Format          =   81723393
          CurrentDate     =   45154
       End
       Begin VB.Label Label7 
@@ -2723,7 +2723,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   50987009
+         Format          =   81723393
          CurrentDate     =   45154
       End
       Begin VB.Label Label6 
@@ -4068,7 +4068,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   50987009
+         Format          =   81723393
          CurrentDate     =   45154
       End
       Begin VB.Label Label4 
@@ -5447,7 +5447,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   50987009
+         Format          =   81723393
          CurrentDate     =   45154
       End
       Begin VB.ComboBox cboName1 
@@ -5538,8 +5538,11 @@ Begin VB.Form frmTreino
          Begin VB.Menu mnuTestBD 
             Caption         =   "Teste de Conexão"
          End
+         Begin VB.Menu mnuAddressBKP 
+            Caption         =   "Endereço do Backup"
+         End
          Begin VB.Menu mnuAddressBD 
-            Caption         =   "Registrar Endereço"
+            Caption         =   "Endereço do Registro"
          End
       End
    End
@@ -5564,6 +5567,7 @@ Dim treino As Boolean ' flag para treino ativo
 
 ' Variáveis para uso do banco de dados
 Public addressRegisters As String ' endereço do banco de dados
+Public addressBackups As String ' endereço de backup do banco de dados
 Public nameRegisters As String ' nome do banco de dados
 Dim query As String ' sql para o banco de dados
 
@@ -5589,7 +5593,8 @@ On Error GoTo Erro
 
     ' Configurações iniciais para o banco de dados
     nameRegisters = "\RegistrosBolao" 'Name do registro
-    addressRegisters = ReadIniValue(App.Path & "\Config.ini", "REGISTROS", "Address") ' Endereço do registro
+    addressRegisters = ReadIniValue(App.Path & "\Config.ini", "REGISTROS", "AddressBD") ' Endereço do registro
+    addressBackups = ReadIniValue(App.Path & "\Config.ini", "REGISTROS", "AddressBKP") ' Endereço de backup
     Adodc1.ConnectionString = "Driver={Microsoft Access Driver (*.mdb)};" & "Dbq= " & frmTreino.addressRegisters & nameRegisters & ";" & "Uid=;"  ' Pwd=1234"
     
     ' Busca nomes cadastrados no registro
@@ -5689,6 +5694,10 @@ On Error GoTo Erro
     Beep
     value = MsgBox("Iniciar o treino com Reserva ?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
     If value = 2 Then Exit Sub ' Não
+     ' Mensagem de confirmação
+    Beep
+    value = MsgBox("Deseja Imprimir Cupom dos Resultados?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
+    If value = 1 Then Call PrintCupom(1) 'Sim
     ' Habilita Reserva
     treino = False
     Call UploadRegisters(1)
@@ -5778,6 +5787,10 @@ On Error GoTo Erro
     Beep
     value = MsgBox("Iniciar o treino com Reserva ?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
     If value = 2 Then Exit Sub ' Não
+     ' Mensagem de confirmação
+    Beep
+    value = MsgBox("Deseja Imprimir Cupom dos Resultados?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
+    If value = 1 Then Call PrintCupom(2) 'Sim
     ' Habilita Reserva
     treino = False
     Call UploadRegisters(2)
@@ -5867,6 +5880,10 @@ On Error GoTo Erro
     Beep
     value = MsgBox("Iniciar o treino com Reserva ?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
     If value = 2 Then Exit Sub ' Não
+     ' Mensagem de confirmação
+    Beep
+    value = MsgBox("Deseja Imprimir Cupom dos Resultados?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
+    If value = 1 Then Call PrintCupom(3) 'Sim
     ' Habilita Reserva
     treino = False
     Call UploadRegisters(3)
@@ -5956,6 +5973,10 @@ On Error GoTo Erro
     Beep
     value = MsgBox("Iniciar o treino com Reserva ?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
     If value = 2 Then Exit Sub ' Não
+     ' Mensagem de confirmação
+    Beep
+    value = MsgBox("Deseja Imprimir Cupom dos Resultados?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
+    If value = 1 Then Call PrintCupom(4) 'Sim
     ' Habilita Reserva
     treino = False
     Call UploadRegisters(4)
@@ -6473,7 +6494,7 @@ Private Function TempRegisters(index As Integer) As Integer
 End Function
 
 '//////////////////////////////////////////////////////////////////////////////////////////////
-' HABILITA COMBOS DE PONTOS
+' HABILITA VISIBILIDADE COMBOS DE PONTOS
 '//////////////////////////////////////////////////////////////////////////////////////////////
 
 Private Sub EnableCombo(index As Integer)
@@ -6481,28 +6502,28 @@ Private Sub EnableCombo(index As Integer)
     
     If index = 1 Then
         For i = 0 To 23
-            Combo1(i).Enabled = True
+            Combo1(i).Visible = True
         Next
         Combo1(1).SetFocus
     End If
     
     If index = 2 Then
         For i = 0 To 23
-            Combo2(i).Enabled = True
+            Combo2(i).Visible = True
         Next
         Combo2(0).SetFocus
     End If
     
     If index = 3 Then
         For i = 0 To 23
-            Combo3(i).Enabled = True
+            Combo3(i).Visible = True
         Next
         Combo3(0).SetFocus
     End If
     
     If index = 1 Then
         For i = 0 To 23
-            Combo1(i).Enabled = True
+            Combo1(i).Visible = True
         Next
         Combo1(0).SetFocus
     End If
@@ -6510,7 +6531,7 @@ Private Sub EnableCombo(index As Integer)
 End Sub
 
 '//////////////////////////////////////////////////////////////////////////////////////////////
-' DESABILITA COMBOS DE PONTOS
+' DESABILITA VISIBILIDADE COMBOS DE PONTOS
 '//////////////////////////////////////////////////////////////////////////////////////////////
 
 Private Sub DesableCombo(index As Integer)
@@ -6519,7 +6540,7 @@ Private Sub DesableCombo(index As Integer)
     If index = 1 Then
         For i = 0 To 23
             If Combo1(i).Text <> Empty Then
-                Combo1(i).Enabled = False
+                Combo1(i).Visible = False
                 index2 = i
             End If
         Next
@@ -6706,14 +6727,24 @@ Private Sub mnuControle_Click()
 End Sub
 
 Private Sub mnuAddressBD_Click()
-    value = InputBox("Digite o Endereço do Banco de Dados.", "DALÇÓQUIO AUTOMAÇÃO", addressRegisters)
+    value = InputBox("Digite o Endereço do Banco de Dados.", "DALÇÓQUIO AUTOMAÇÃO", addressBackups)
     If value <> Empty Then
         addressRegisters = value
-        WriteIniValue App.Path & "\Config.ini", "REGISTROS", "address", addressRegisters
+        WriteIniValue App.Path & "\Config.ini", "REGISTROS", "addressBD", addressRegisters
         MsgBox "Fechando sistema para atualização do endereço do bando de dados, você deverá abri-lo novamente...", vbInformation, "DALÇÓQUIO AUTOMAÇÃO"
         End ' Fecha o sistema
     End If
 
+End Sub
+
+Private Sub mnuAddressBKP_Click()
+    value = InputBox("Digite o Endereço de Backup.", "DALÇÓQUIO AUTOMAÇÃO", addressRegisters)
+    If value <> Empty Then
+        addressBackups = value
+        WriteIniValue App.Path & "\Config.ini", "REGISTROS", "addressBKP", addressBackups
+        MsgBox "Fechando sistema para atualização do endereço de Backup, você deverá abri-lo novamente...", vbInformation, "DALÇÓQUIO AUTOMAÇÃO"
+        End ' Fecha o sistema
+    End If
 End Sub
 
 Private Sub mnuTestBD_Click()

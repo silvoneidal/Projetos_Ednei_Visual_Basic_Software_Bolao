@@ -21,3 +21,8 @@ Private Sub MDIForm_Load()
     Me.Caption = App.Title & "_v" & App.Major & "." & App.Minor & " Beta " & " by DALÇOQUIO AUTOMAÇÃO" & "  " & "[ " & frmTreino.addressRegisters & " ]"
     
 End Sub
+
+Private Sub MDIForm_Unload(Cancel As Integer)
+    StartBackup  ' Executa backup do bando de dados
+    
+End Sub

@@ -219,7 +219,7 @@ Begin VB.Form frmRegistros
          _ExtentX        =   2566
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   50987009
+         Format          =   54394881
          CurrentDate     =   45156
       End
       Begin MSComCtl2.DTPicker dtpFinal 
@@ -231,7 +231,7 @@ Begin VB.Form frmRegistros
          _ExtentX        =   2566
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   50987009
+         Format          =   54394881
          CurrentDate     =   45156
       End
    End
@@ -941,7 +941,9 @@ Private Sub cmdNome_Click()
 On Error GoTo Erro
     ' Verifica se nome em branco
     If cboName.Text = Empty Then
+        cboName.BackColor = vbYellow
         MsgBox "Nenhum nome selecionado.", vbInformation, "DALCOQUIO AUTOMAÇÃO"
+        cboName.BackColor = vbWhite
         Exit Sub
     End If
     
@@ -968,7 +970,9 @@ Private Sub cmdData_Click()
 On Error GoTo Erro
     ' Verifica se nome em branco
     If cboName.Text = Empty Then
+        cboName.BackColor = vbYellow
         MsgBox "Nenhum nome selecionado.", vbInformation, "DALCOQUIO AUTOMAÇÃO"
+        cboName.BackColor = vbWhite
         Exit Sub
     End If
     
@@ -995,7 +999,9 @@ Private Sub cmdPeriodo_Click()
 On Error GoTo Erro
     ' Verifica se nome em branco
     If cboName.Text = Empty Then
+        cboName.BackColor = vbYellow
         MsgBox "Nenhum nome selecionado.", vbInformation, "DALCOQUIO AUTOMAÇÃO"
+        cboName.BackColor = vbWhite
         Exit Sub
     End If
     
