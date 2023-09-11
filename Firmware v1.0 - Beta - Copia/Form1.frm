@@ -1378,7 +1378,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   54591489
+         Format          =   53280769
          CurrentDate     =   45154
       End
       Begin VB.Label Label7 
@@ -2723,7 +2723,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   54591489
+         Format          =   53280769
          CurrentDate     =   45154
       End
       Begin VB.Label Label6 
@@ -4068,7 +4068,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   54591489
+         Format          =   53280769
          CurrentDate     =   45154
       End
       Begin VB.Label Label4 
@@ -5447,7 +5447,7 @@ Begin VB.Form frmTreino
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Format          =   54591489
+         Format          =   53280769
          CurrentDate     =   45154
       End
       Begin VB.ComboBox cboName1 
@@ -5630,7 +5630,9 @@ Private Sub cmdIniciar1_Click()
 
     ' Verifica se nome em branco
     If cboName1.Text = Empty Then
+        cboName1.BackColor = vbYellow
         MsgBox "Nenhum nome selecionado.", vbInformation, "DALCOQUIO AUTOMAÇÃO"
+        cboName1.BackColor = vbWhite
         Exit Sub
     End If
     
@@ -5694,6 +5696,10 @@ On Error GoTo Erro
     Beep
     value = MsgBox("Iniciar o treino com Reserva ?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
     If value = 2 Then Exit Sub ' Não
+     ' Mensagem de confirmação
+    Beep
+    value = MsgBox("Deseja Imprimir Cupom dos Resultados?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
+    If value = 1 Then Call PrintCupom(1) 'Sim
     ' Habilita Reserva
     treino = False
     Call UploadRegisters(1)
@@ -5719,7 +5725,9 @@ Private Sub cmdIniciar2_Click()
 
     ' Verifica se nome em branco
     If cboName2.Text = Empty Then
+        cboName2.BackColor = vbYellow
         MsgBox "Nenhum nome selecionado.", vbInformation, "DALCOQUIO AUTOMAÇÃO"
+        cboName2.BackColor = vbWhite
         Exit Sub
     End If
     
@@ -5783,6 +5791,10 @@ On Error GoTo Erro
     Beep
     value = MsgBox("Iniciar o treino com Reserva ?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
     If value = 2 Then Exit Sub ' Não
+     ' Mensagem de confirmação
+    Beep
+    value = MsgBox("Deseja Imprimir Cupom dos Resultados?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
+    If value = 1 Then Call PrintCupom(2) 'Sim
     ' Habilita Reserva
     treino = False
     Call UploadRegisters(2)
@@ -5808,7 +5820,9 @@ Private Sub cmdIniciar3_Click()
 
     ' Verifica se nome em branco
     If cboName3.Text = Empty Then
+        cboName3.BackColor = vbYellow
         MsgBox "Nenhum nome selecionado.", vbInformation, "DALCOQUIO AUTOMAÇÃO"
+        cboName3.BackColor = vbWhite
         Exit Sub
     End If
     
@@ -5872,6 +5886,10 @@ On Error GoTo Erro
     Beep
     value = MsgBox("Iniciar o treino com Reserva ?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
     If value = 2 Then Exit Sub ' Não
+     ' Mensagem de confirmação
+    Beep
+    value = MsgBox("Deseja Imprimir Cupom dos Resultados?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
+    If value = 1 Then Call PrintCupom(3) 'Sim
     ' Habilita Reserva
     treino = False
     Call UploadRegisters(3)
@@ -5897,7 +5915,9 @@ Private Sub cmdIniciar4_Click()
 
     ' Verifica se nome em branco
     If cboName4.Text = Empty Then
+        cboName4.BackColor = vbYellow
         MsgBox "Nenhum nome selecionado.", vbInformation, "DALCOQUIO AUTOMAÇÃO"
+        cboName4.BackColor = vbWhite
         Exit Sub
     End If
     
@@ -5961,6 +5981,10 @@ On Error GoTo Erro
     Beep
     value = MsgBox("Iniciar o treino com Reserva ?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
     If value = 2 Then Exit Sub ' Não
+     ' Mensagem de confirmação
+    Beep
+    value = MsgBox("Deseja Imprimir Cupom dos Resultados?", vbOKCancel, "DALCOQUIO AUTOMAÇÃO")
+    If value = 1 Then Call PrintCupom(4) 'Sim
     ' Habilita Reserva
     treino = False
     Call UploadRegisters(4)
@@ -6015,12 +6039,12 @@ On Error GoTo Erro
     
         ' Soma T1
         txtTotal1(1).Text = "0"
-        For i = 0 To 5
+        For i = 1 To 5
             If Combo1(i).Text <> Empty Then txtTotal1(1).Text = CInt(txtTotal1(1).Text) + CInt(Combo1(i).Text)
         Next i
         ' Soma T2
         txtTotal1(2).Text = "0"
-        For i = 6 To 11
+        For i = 7 To 11
             If Combo1(i).Text <> Empty Then txtTotal1(2).Text = CInt(txtTotal1(2).Text) + CInt(Combo1(i).Text)
         Next i
         'Soma T1 + T2
@@ -6028,12 +6052,12 @@ On Error GoTo Erro
     
         ' Soma T3
         txtTotal1(4).Text = "0"
-        For i = 12 To 17
+        For i = 13 To 17
             If Combo1(i).Text <> Empty Then txtTotal1(4).Text = CInt(txtTotal1(4).Text) + CInt(Combo1(i).Text)
         Next i
         ' Soma T4
         txtTotal1(5).Text = "0"
-        For i = 18 To 23
+        For i = 19 To 23
             If Combo1(i).Text <> Empty Then txtTotal1(5).Text = CInt(txtTotal1(5).Text) + CInt(Combo1(i).Text)
         Next i
         'Soma T3 + T4
@@ -6051,12 +6075,12 @@ On Error GoTo Erro
     
         ' Soma T1
         txtTotal2(1).Text = "0"
-        For i = 0 To 5
+        For i = 1 To 5
             If Combo2(i).Text <> Empty Then txtTotal2(1).Text = CInt(txtTotal2(1).Text) + CInt(Combo2(i).Text)
         Next i
         ' Soma T2
         txtTotal2(2).Text = "0"
-        For i = 6 To 11
+        For i = 7 To 11
             If Combo2(i).Text <> Empty Then txtTotal2(2).Text = CInt(txtTotal2(2).Text) + CInt(Combo2(i).Text)
         Next i
         'Soma T1 + T2
@@ -6064,12 +6088,12 @@ On Error GoTo Erro
     
         ' Soma T3
         txtTotal2(4).Text = "0"
-        For i = 12 To 17
+        For i = 13 To 17
             If Combo2(i).Text <> Empty Then txtTotal2(4).Text = CInt(txtTotal2(4).Text) + CInt(Combo2(i).Text)
         Next i
         ' Soma T4
         txtTotal2(5).Text = "0"
-        For i = 18 To 23
+        For i = 19 To 23
             If Combo2(i).Text <> Empty Then txtTotal2(5).Text = CInt(txtTotal2(5).Text) + CInt(Combo2(i).Text)
         Next i
         'Soma T1 + T2
@@ -6087,12 +6111,12 @@ On Error GoTo Erro
     
         ' Soma T1
         txtTotal3(1).Text = "0"
-        For i = 0 To 5
+        For i = 1 To 5
             If Combo3(i).Text <> Empty Then txtTotal3(1).Text = CInt(txtTotal3(1).Text) + CInt(Combo3(i).Text)
         Next i
         ' Soma T2
         txtTotal3(2).Text = "0"
-        For i = 6 To 11
+        For i = 7 To 11
             If Combo3(i).Text <> Empty Then txtTotal3(2).Text = CInt(txtTotal3(2).Text) + CInt(Combo3(i).Text)
         Next i
         'Soma T1 + T2
@@ -6100,12 +6124,12 @@ On Error GoTo Erro
     
         ' Soma T3
         txtTotal3(4).Text = "0"
-        For i = 12 To 17
+        For i = 13 To 17
             If Combo3(i).Text <> Empty Then txtTotal3(4).Text = CInt(txtTotal3(4).Text) + CInt(Combo3(i).Text)
         Next i
         ' Soma T4
         txtTotal3(5).Text = "0"
-        For i = 18 To 23
+        For i = 19 To 23
             If Combo3(i).Text <> Empty Then txtTotal3(5).Text = CInt(txtTotal3(5).Text) + CInt(Combo3(i).Text)
         Next i
         'Soma T3 + T4
@@ -6123,12 +6147,12 @@ On Error GoTo Erro
     
         ' Soma T1
         txtTotal4(1).Text = "0"
-        For i = 0 To 5
+        For i = 1 To 5
             If Combo4(i).Text <> Empty Then txtTotal4(1).Text = CInt(txtTotal4(1).Text) + CInt(Combo4(i).Text)
         Next i
         ' Soma T2
         txtTotal4(2).Text = "0"
-        For i = 6 To 11
+        For i = 7 To 11
             If Combo4(i).Text <> Empty Then txtTotal4(2).Text = CInt(txtTotal4(2).Text) + CInt(Combo4(i).Text)
         Next i
         'Soma T1 + T2
@@ -6136,12 +6160,12 @@ On Error GoTo Erro
     
         ' Soma T3
         txtTotal4(4).Text = "0"
-        For i = 12 To 17
+        For i = 13 To 17
             If Combo4(i).Text <> Empty Then txtTotal4(4).Text = CInt(txtTotal4(4).Text) + CInt(Combo4(i).Text)
         Next i
         ' Soma T4
         txtTotal4(5).Text = "0"
-        For i = 18 To 23
+        For i = 19 To 23
             If Combo4(i).Text <> Empty Then txtTotal4(5).Text = CInt(txtTotal4(5).Text) + CInt(Combo4(i).Text)
         Next i
         'Soma T3 + T4
@@ -6478,7 +6502,7 @@ Private Function TempRegisters(index As Integer) As Integer
 End Function
 
 '//////////////////////////////////////////////////////////////////////////////////////////////
-' HABILITA COMBOS DE PONTOS
+' HABILITA VISIBILIDADE COMBOS DE PONTOS
 '//////////////////////////////////////////////////////////////////////////////////////////////
 
 Private Sub EnableCombo(index As Integer)
@@ -6486,28 +6510,28 @@ Private Sub EnableCombo(index As Integer)
     
     If index = 1 Then
         For i = 0 To 23
-            Combo1(i).Enabled = True
+            Combo1(i).Visible = True
         Next
         Combo1(1).SetFocus
     End If
     
     If index = 2 Then
         For i = 0 To 23
-            Combo2(i).Enabled = True
+            Combo2(i).Visible = True
         Next
         Combo2(0).SetFocus
     End If
     
     If index = 3 Then
         For i = 0 To 23
-            Combo3(i).Enabled = True
+            Combo3(i).Visible = True
         Next
         Combo3(0).SetFocus
     End If
     
     If index = 1 Then
         For i = 0 To 23
-            Combo1(i).Enabled = True
+            Combo1(i).Visible = True
         Next
         Combo1(0).SetFocus
     End If
@@ -6515,7 +6539,7 @@ Private Sub EnableCombo(index As Integer)
 End Sub
 
 '//////////////////////////////////////////////////////////////////////////////////////////////
-' DESABILITA COMBOS DE PONTOS
+' DESABILITA VISIBILIDADE COMBOS DE PONTOS
 '//////////////////////////////////////////////////////////////////////////////////////////////
 
 Private Sub DesableCombo(index As Integer)
@@ -6524,7 +6548,7 @@ Private Sub DesableCombo(index As Integer)
     If index = 1 Then
         For i = 0 To 23
             If Combo1(i).Text <> Empty Then
-                Combo1(i).Enabled = False
+                Combo1(i).Visible = False
                 index2 = i
             End If
         Next

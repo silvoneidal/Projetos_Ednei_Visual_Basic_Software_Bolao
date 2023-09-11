@@ -15,6 +15,7 @@ Object={F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0; comdlg32.ocx
 Form=Form4.frm
 Form=Form5.frm
 Module=ModuleBKP; ModuleBKP.bas
+Module=mdIInputbox; mdIInputBox.bas
 IconForm="frmTreino"
 Startup="frmTreino"
 HelpFile=""

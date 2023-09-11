@@ -219,7 +219,7 @@ Begin VB.Form frmRegistros
          _ExtentX        =   2566
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   54394881
+         Format          =   53084161
          CurrentDate     =   45156
       End
       Begin MSComCtl2.DTPicker dtpFinal 
@@ -231,7 +231,7 @@ Begin VB.Form frmRegistros
          _ExtentX        =   2566
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   54394881
+         Format          =   53084161
          CurrentDate     =   45156
       End
    End
@@ -1027,10 +1027,20 @@ End Sub
 
 Private Sub cmdEditar_Click()
     If cmdEditar.Caption = "Editar (Desativado)" Then
-        DataGrid1.AllowDelete = True
-        DataGrid1.AllowUpdate = True
-        cmdEditar.Caption = "Editar (Ativado)"
-        cmdEditar.BackColor = vbYellow
+        ' Senha do administrador
+        Dim password As String
+        password = InputBoxDK("Digite a senha do administrador.", "DALÇÓQUIO AUTOMAÇÃO", "******")
+        If password = "123456" Then
+            DataGrid1.AllowDelete = True
+            DataGrid1.AllowUpdate = True
+            cmdEditar.Caption = "Editar (Ativado)"
+            cmdEditar.BackColor = vbYellow
+        Else
+            If password <> Empty Then
+                MsgBox "Senha incorreta, tente novamente ou contate o administrador.", vbCritical, "DALÇÓQUIO AUTOMAÇÃO"
+            End If
+            Exit Sub
+        End If
     Else
         DataGrid1.AllowDelete = False
         DataGrid1.AllowUpdate = False
